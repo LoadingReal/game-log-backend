@@ -24,7 +24,7 @@ export const getPostsHandler = factory.createHandlers(async (c) => {
         posts: posts,
         editorsPosts: editorsPosts,
       },
-      200
+      200,
     );
   } catch (err) {
     return c.json({ success: false, messages: ["Failed to get posts"] }, 500);
@@ -80,7 +80,7 @@ export const createPostHandler = factory.createHandlers(async (c) => {
         messages: ["Successfully created a post"],
         post: post,
       },
-      201
+      201,
     );
   } catch (err) {
     return c.json({ success: false, messages: ["Failed to create post"] }, 500);
@@ -105,7 +105,7 @@ export const getPostHandler = factory.createHandlers(async (c) => {
   } catch (err) {
     return c.json(
       { success: false, messages: ["Failed to get single post"] },
-      500
+      500,
     );
   }
 });
@@ -169,7 +169,7 @@ export const editPostHandler = factory.createHandlers(async (c) => {
         messages: ["Successfully edited post"],
         post: updated,
       },
-      200
+      200,
     );
   } catch (err) {
     return c.json({ success: false, messages: ["Failed to edit post"] }, 500);
@@ -193,7 +193,7 @@ export const deletePostHandler = factory.createHandlers(async (c) => {
     const deleted = await deletePostDb(postId);
     return c.json(
       { success: true, messages: ["Successfully deleted post"], post: deleted },
-      200
+      200,
     );
   } catch (err) {
     return c.json({ success: false, messages: ["Failed to delete post"] }, 500);
