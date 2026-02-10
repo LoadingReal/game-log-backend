@@ -3,10 +3,13 @@ import pg from "pg";
 import "dotenv/config";
 import * as schema from "./schema.js";
 
-const client = new pg.Client({
+const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
+  connectionTimeoutMillis: 5000,
 });
 
-await client.connect();
+pool.on("error", (err) => {
+  console.error("Unexpected error on idle SQL client", err);
+});
 
-export const db = drizzle(client, { schema });
+export const db = drizzle(pool, { schema });
