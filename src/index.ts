@@ -10,7 +10,12 @@ import { cors } from "hono/cors";
 
 const app = new Hono<{ Variables: Variables }>();
 
-app.use(cors());
+app.use('*', cors({
+  origin: ['https://game-log.pages.dev', 'http://localhost:5173'],
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}))
 
 app.route("/auth", auth);
 app.route("/register", register);
